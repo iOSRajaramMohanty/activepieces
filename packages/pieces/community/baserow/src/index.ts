@@ -14,6 +14,8 @@ import { aggregateFieldAction } from './lib/actions/aggregate-field';
 import { batchCreateRowsAction } from './lib/actions/batch-create-rows';
 import { batchUpdateRowsAction } from './lib/actions/batch-update-rows';
 import { batchDeleteRowsAction } from './lib/actions/batch-delete-rows';
+import { upsertRowAction } from './lib/actions/upsert-row';
+import { uploadFileAction } from './lib/actions/upload-file';
 import { rowCreatedTrigger } from './lib/triggers/row-created';
 import { rowUpdatedTrigger } from './lib/triggers/row-updated';
 import { rowDeletedTrigger } from './lib/triggers/row-deleted';
@@ -49,16 +51,18 @@ export const baserow = createPiece({
   authors: ["kishanprmr", "MoShizzle", "abuaboud", 'bst1n', 'sanket-a11y', 'onyedikachi-david'],
   actions: [
     createRowAction,
-    deleteRowAction,
     getRowAction,
     listRowsAction,
-    updateRowAction,
     findRowAction,
+    updateRowAction,
+    upsertRowAction,
+    deleteRowAction,
     cleanRowAction,
-    aggregateFieldAction,
     batchCreateRowsAction,
     batchUpdateRowsAction,
     batchDeleteRowsAction,
+    aggregateFieldAction,
+    uploadFileAction,
     createCustomApiCallAction({
       baseUrl: (auth) => {
         if (!auth) {

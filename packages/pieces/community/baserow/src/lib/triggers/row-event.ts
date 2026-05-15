@@ -13,7 +13,7 @@ export const rowEventTrigger = createTrigger({
   auth: baserowAuth,
   displayName: 'Any Row Change',
   description:
-    'Triggers when a row is created, updated, or deleted in a Baserow table. To react to only one event type, use the dedicated Row Created, Row Updated, or Row Deleted triggers.',
+    'Triggers when a row is created, updated, or deleted in a Baserow table. To react to only one event type, use the dedicated New Row, Updated Row, or Deleted Row triggers.',
   type: TriggerStrategy.WEBHOOK,
   props: {
     table_id: baserowCommon.tableId(),
@@ -61,9 +61,7 @@ export const rowEventTrigger = createTrigger({
     const tableId = context.propsValue.table_id;
     if (!tableId) return [];
     const client = await makeClient(context.auth);
-    const response = (await client.listRows(tableId, 1, 5)) as {
-      results: Record<string, unknown>[];
-    };
+    const response = await client.listRows(tableId, 1, 5);
     return response.results.map((row) => ({
       event_type: 'rows.created',
       row,
